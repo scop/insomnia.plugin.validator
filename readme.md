@@ -8,11 +8,11 @@ With insomnia open, go to Preferences > Plugins. Add `insomnia-plugin-validator`
 
 ## Configuration
 
-To add your spec file, you need to add it to your environment. Open up the environment manager and create a `spec` object with at least the *absolute* path to your swagger spec file on disk:
+To add your spec file, you need to add it to your environment. Open up the environment manager and create a `spec_validator` object with at least the *absolute* path to your swagger spec file on disk:
 
 ```json
 {
-    "spec": {
+    "spec_validator": {
         "path": "/Users/You/Desktop/yourapispec.json",
         "base": "https://api.you.com/v3",
         "enabled": true
@@ -22,11 +22,11 @@ To add your spec file, you need to add it to your environment. Open up the envir
 
 | Option         | Type     | Required | Default | Description |
 | -------------- | -------- | -------- | ------- | ----------- |
-| `spec.base`    | `string` | `true`   | `null`  | The API base path (see below) |
-| `spec.path`    | `string` | `true`   | `null`  | The absolute path to your spec file |
-| `spec.enabled` | `bool`   | `true`   | `true`  | When set to `false` validation will be bypassed |
+| `spec_validator.base`    | `string` | `true`   | `null`  | The API base path (see below) |
+| `spec_validator.path`    | `string` | `true`   | `null`  | The absolute path to your spec file |
+| `spec_validator.enabled` | `bool`   | `true`   | `true`  | When set to `false` validation will be bypassed |
 
-Insomnia gives us the request context when we're validating and we need to extract the path to validate against without the URL. To do this, we will remove `spec.base` from the URL the request was sent to. This also allows you to validate the same spec against multiple environments. For example, if you are making an API call to `https://api.you.com/v3/myresource` the correct value for `spec.base` is `https://api.you.com/v3`. 
+Insomnia gives us the request context when we're validating and we need to extract the path to validate against without the URL. To do this, we will remove `spec_validator.base` from the URL the request was sent to. This also allows you to validate the same spec against multiple environments. For example, if you are making an API call to `https://api.you.com/v3/myresource` the correct value for `spec_validator.base` is `https://api.you.com/v3`.
 
 Now when you make requests to the API, the response body will be validated against your spec file and you will be notified if your responses do not conform to the spec.
 
